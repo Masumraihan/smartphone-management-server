@@ -2,9 +2,10 @@ import jwt from "jsonwebtoken";
 import AppError from "../../errors/AppError";
 import { StatusCodes } from "http-status-codes";
 export const createToken = (
-  jwtPayload: { name: string; email: string },
+  jwtPayload: { name: string; email: string, role: string },
   secret: string,
   expiresIn: string,
+
 ) => {
   const token = jwt.sign(jwtPayload, secret, { expiresIn });
   return token;

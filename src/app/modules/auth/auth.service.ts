@@ -75,7 +75,7 @@ const refreshToken = async (token: string) => {
 
   const decode = verifyToken(token, config.refresh_token_secret) as JwtPayload;
 
-  const { email, name } = decode;
+  const { email, name, role } = decode;
 
   const user = RegisterUserModel.findOne({ email, name });
   if (!user) {
@@ -83,7 +83,7 @@ const refreshToken = async (token: string) => {
   }
 
   const accessToken = createToken(
-    { email, name },
+    { email, name, role },
     config.access_token_secret,
     config.access_token_expires_in,
   );
