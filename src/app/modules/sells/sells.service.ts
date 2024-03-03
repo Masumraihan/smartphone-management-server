@@ -7,6 +7,7 @@ import SellsModel from "./sells.model";
 import moment from "moment";
 import { JwtPayload } from "jsonwebtoken";
 import RegisterUserModel from "../auth/auth.model";
+import { userRole } from "../auth/auth.constant";
 
 const createSells = async (payload: TSells, user: JwtPayload) => {
   const { quantity, buyer, product, salesDate } = payload;
@@ -85,6 +86,12 @@ const getSalesHistory = async (payload: string, user: JwtPayload) => {
         seller: isUserExist._id,
         createdAt: { $gte: startOfDay, $lte: endOfDay },
       }).populate("seller");
+
+      if ((isUserExist.role = userRole.superAdmin)) {
+        result = await SellsModel.find({
+          createdAt: { $gte: startOfDay, $lte: endOfDay },
+        }).populate("seller");
+      }
       break;
     }
     case "week": {
@@ -94,6 +101,12 @@ const getSalesHistory = async (payload: string, user: JwtPayload) => {
         seller: isUserExist._id,
         createdAt: { $gte: startOfWeek, $lte: endOfWeek },
       }).populate("seller");
+
+      if ((isUserExist.role = userRole.superAdmin)) {
+        result = await SellsModel.find({
+          createdAt: { $gte: startOfWeek, $lte: endOfWeek },
+        }).populate("seller");
+      }
       break;
     }
     case "month": {
@@ -103,6 +116,13 @@ const getSalesHistory = async (payload: string, user: JwtPayload) => {
         seller: isUserExist._id,
         createdAt: { $gte: startOfMonth, $lte: endOfMonth },
       }).populate("seller");
+
+      if ((isUserExist.role = userRole.superAdmin)) {
+        result = await SellsModel.find({
+          createdAt: { $gte: startOfMonth, $lte: endOfMonth },
+        }).populate("seller");
+      }
+
       break;
     }
     case "year": {
@@ -112,10 +132,21 @@ const getSalesHistory = async (payload: string, user: JwtPayload) => {
         seller: isUserExist._id,
         createdAt: { $gte: startOfYear, $lte: endOfYear },
       }).populate("seller");
+
+      if ((isUserExist.role = userRole.superAdmin)) {
+        result = await SellsModel.find({
+          createdAt: { $gte: startOfYear, $lte: endOfYear },
+        }).populate("seller");
+      }
       break;
     }
     default:
-      result = await SellsModel.find({ seller: isUserExist._id }).populate("seller");
+      result = await SellsModel.find({
+        seller: isUserExist._id,
+      }).populate("seller");
+      if ((isUserExist.role = userRole.superAdmin)) {
+        result = await SellsModel.find({}).populate("seller");
+      }
       break;
   }
 
