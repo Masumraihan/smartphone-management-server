@@ -24,7 +24,7 @@ const registerUser = async (payload: TRegisterUser) => {
 // login
 const loginUser = async (payload: TLoginUser) => {
   const { password, email } = payload;
-  const user = await RegisterUserModel.findOne({ email }).select("password email name");
+  const user = await RegisterUserModel.findOne({ email }).select("password email name role");
   if (!user) {
     throw new AppError(StatusCodes.NOT_FOUND, "User not found");
   }
@@ -52,7 +52,7 @@ const loginUser = async (payload: TLoginUser) => {
     config.refresh_token_expires_in,
   );
 
-  return { accessToken, refreshToken, user: { ...jwtPayload, _id: user._id } };
+  return { accessToken, refreshToken, user: { ...jwtPayload, _id: user._id, role: user.role } };
 };
 
 const refreshToken = async (token: string) => {
