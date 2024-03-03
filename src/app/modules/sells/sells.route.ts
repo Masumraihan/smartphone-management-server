@@ -8,13 +8,13 @@ const router = express.Router();
 
 router.post(
   "/create-sales",
-  auth(userRole.superAdmin),
+  auth(userRole.superAdmin, userRole.manager),
   validateRequest(SellsValidations.createSellsValidationSchema),
   SellsController.createSells,
 );
 router.get(
   "/get-sales-history/:filterBy",
-  auth(userRole.superAdmin),
+  auth(userRole.superAdmin, userRole.seller),
   SellsController.getSalesHistory,
 );
 

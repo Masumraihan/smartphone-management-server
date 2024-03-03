@@ -28,6 +28,26 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllUser = catchAsync(async (req: Request, res: Response) => {
+  const result = await AuthServices.getAllUser();
+  sendResponse(res, {
+    message: "Users Retrieved Successfully",
+    statusCode: 200,
+    success: true,
+    data: result,
+  });
+});
+
+const updateUser = catchAsync(async (req: Request, res: Response) => {
+  const result = await AuthServices.updateUser(req.body, req.params.userId);
+  sendResponse(res, {
+    message: "User Updated Successfully",
+    statusCode: 200,
+    success: true,
+    data: result,
+  });
+});
+
 const refreshToken = catchAsync(async (req, res) => {
   const { refreshToken } = req.cookies;
   const accessToken = await AuthServices.refreshToken(refreshToken);
@@ -42,5 +62,7 @@ const refreshToken = catchAsync(async (req, res) => {
 export const AuthControllers = {
   registerUser,
   loginUser,
+  getAllUser,
+  updateUser,
   refreshToken,
 };

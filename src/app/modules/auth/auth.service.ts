@@ -55,6 +55,19 @@ const loginUser = async (payload: TLoginUser) => {
   return { accessToken, refreshToken, user: { ...jwtPayload, _id: user._id, role: user.role } };
 };
 
+const getAllUser = async () => {
+  const result = await RegisterUserModel.find({ $nor: [{ role: "superAdmin" }] });
+  return result;
+};
+
+const updateUser = async (payload: Partial<TRegisterUser>, id: string) => {
+  const result = await RegisterUserModel.findByIdAndUpdate(id, payload, {
+    new: true,
+    runValidators: true,
+  });
+  return result;
+};
+
 const refreshToken = async (token: string) => {
   if (!token) {
     throw new AppError(StatusCodes.UNAUTHORIZED, "Your are not authorized");
@@ -80,5 +93,7 @@ const refreshToken = async (token: string) => {
 export const AuthServices = {
   registerUser,
   loginUser,
+  getAllUser,
+  updateUser,
   refreshToken,
 };

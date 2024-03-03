@@ -58,6 +58,12 @@ const getSalesHistory = async (payload: string) => {
   const currentDate = moment();
 
   switch (payload) {
+    case "day": {
+      const startOfDay = currentDate.startOf("day").toDate();
+      const endOfDay = currentDate.endOf("day").toDate();
+      result = await SellsModel.find({ createdAt: { $gte: startOfDay, $lte: endOfDay } });
+      break;
+    }
     case "week": {
       const startOfWeek = currentDate.startOf("week").toDate();
       const endOfWeek = currentDate.endOf("week").toDate();
@@ -80,8 +86,6 @@ const getSalesHistory = async (payload: string) => {
       result = await SellsModel.find();
       break;
   }
-
-
 
   const data = result.map((item) => {
     return {

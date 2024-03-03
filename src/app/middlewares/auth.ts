@@ -31,7 +31,6 @@ const auth = (...requiredRole: TUserRole[]) => {
       throw new AppError(StatusCodes.UNAUTHORIZED, "Unauthorized");
     }
     req.user = decode;
-    console.log(user.role, requiredRole);
 
     if (requiredRole && !requiredRole.includes(user.role)) {
       throw new AppError(StatusCodes.UNAUTHORIZED, "Unauthorized");
