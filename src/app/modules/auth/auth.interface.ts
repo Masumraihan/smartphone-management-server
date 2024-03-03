@@ -1,8 +1,9 @@
+export type TUserRole = "superAdmin" | "manager" | "seller";
 export type TRegisterUser = {
   name: string;
   email: string;
   password: string;
-  role: "superAdmin" | "manager" | "seller";
+  role: TUserRole;
 };
 
 export type TLoginUser = {

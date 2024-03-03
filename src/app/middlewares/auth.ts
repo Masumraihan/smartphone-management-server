@@ -7,8 +7,9 @@ import AppError from "../errors/AppError";
 import RegisterUserModel from "../modules/auth/auth.model";
 import { verifyToken } from "../modules/auth/auth.utils";
 import catchAsync from "../utils/catchAsync";
+import { TUserRole } from "../modules/auth/auth.interface";
 
-const auth = () => {
+const auth = (...requiredRole: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization;
 
@@ -30,6 +31,12 @@ const auth = () => {
       throw new AppError(StatusCodes.UNAUTHORIZED, "Unauthorized");
     }
     req.user = decode;
+    console.log(user.role, requiredRole);
+
+    if (requiredRole && !requiredRole.includes(user.role)) {
+      throw new AppError(StatusCodes.UNAUTHORIZED, "Unauthorized");
+    }
+
     next();
   });
 };
