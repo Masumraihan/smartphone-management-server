@@ -8,7 +8,8 @@ const sellsSchema = new Schema<TSells>(
     buyer: { type: String, required: true },
     quantity: { type: Number, required: true },
     salesPrice: { type: Number, required: true },
-    salesDate: { type: String, required: true },
+    salesDate: { type: String, default: new Date().toDateString() },
+    seller: { type: Schema.Types.ObjectId, required: true, ref: "User" },
   },
   {
     timestamps: true,
