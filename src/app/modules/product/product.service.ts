@@ -8,7 +8,10 @@ const createProduct = async (payload: TProduct) => {
   return result;
 };
 const getAllProduct = async (query: Record<string, unknown>) => {
-  const productQuery = new QueryBuilder(ProductModel.find().populate("user"), query)
+  const productQuery = new QueryBuilder(
+    ProductModel.find({ quantity: { $gt: 0 } }).populate("user"),
+    query,
+  )
     .search(productSearchableFields)
     .filter()
     .minPrice()
@@ -36,7 +39,7 @@ const updateProduct = (id: string, payload: Partial<TProduct>) => {
 };
 
 const deleteProducts = async (productsId: string[]) => {
-  const result = ProductModel.deleteMany({ _id: productsId, quantity: { $gt: 0 } });
+  const result = ProductModel.deleteMany({ _id: productsId });
   return result;
 };
 
