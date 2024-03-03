@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"name": "server2",
+		"path": "../../server2"
+	},
+	{
+		"name": "src",
+		"path": "."
+	}
+],
+  "settings": {}
+}
