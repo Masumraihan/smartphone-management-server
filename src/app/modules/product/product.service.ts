@@ -16,9 +16,9 @@ const getAllProduct = async (query: Record<string, unknown>) => {
     .sort()
     .paginate()
     .fields();
-  
+
   const result = await productQuery.modelQuery;
- 
+
   return result;
 };
 
@@ -36,7 +36,7 @@ const updateProduct = (id: string, payload: Partial<TProduct>) => {
 };
 
 const deleteProducts = async (productsId: string[]) => {
-  const result = ProductModel.deleteMany({ _id: productsId });
+  const result = ProductModel.deleteMany({ _id: productsId, quantity: { $gt: 0 } });
   return result;
 };
 

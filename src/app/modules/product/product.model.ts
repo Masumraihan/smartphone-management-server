@@ -22,5 +22,6 @@ export const productSchema = new Schema<TProduct>(
   },
 );
 
+
 const ProductModel = mongoose.model<TProduct>("Product", productSchema);
 export default ProductModel;
