@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post(
   "/create-sales",
-  auth(userRole.superAdmin, userRole.manager),
+  auth(userRole.superAdmin, userRole.seller),
   validateRequest(SellsValidations.createSellsValidationSchema),
   SellsController.createSells,
 );
