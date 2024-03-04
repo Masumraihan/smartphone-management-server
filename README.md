@@ -13,6 +13,15 @@ This project is a product management dashboard designed to facilitate efficient 
 - Secure data storage using MongoDB with Mongoose.
 - Express.js server for handling API requests.
 
+### Additional Features
+
+- **Role-based Access Control:** Three roles are implemented - SuperAdmin, Manager, and Seller.
+- **Role-specific Functionality:** Each role has access to specific functionalities, ensuring secure and controlled access.
+- **New Roles and Functionality:**
+  - **SuperAdmin:** Can access all functionalities.
+  - **Manager:** Can add and update products.
+  - **Seller:** Can sell products, view sales history, and download invoices.
+
 ## Installation
 
 Before running the project, ensure you have Node.js and npm (or yarn or pnpm) installed on your machine.
@@ -40,8 +49,8 @@ yarn dev
 pnpm dev
 ```
 
-### [Project Overview Video](https://drive.google.com/file/d/13lcSFGa-1huwbMmTIL6IhFsJF9TnMQ1E/view?usp=sharing)
+### [Project Overview Video](https://drive.google.com/file/d/1nUbvemq86N7Wdczt7YCQtpot0zAqv7St/view?usp=sharing)
 
-### [Client Github](https://github.com/Porgramming-Hero-web-course/l2b2-full-stack-a5-client-side-Masumraihan)
+### [Client Github](https://github.com/Porgramming-Hero-web-course/l2-b2-assignment-6-fronten-Masumraihan)
 
 ### [Live Api](https://server-tau-fawn.vercel.app/)

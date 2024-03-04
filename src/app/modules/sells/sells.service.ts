@@ -87,7 +87,7 @@ const getSalesHistory = async (payload: string, user: JwtPayload) => {
         createdAt: { $gte: startOfDay, $lte: endOfDay },
       }).populate("seller");
 
-      if ((isUserExist.role === userRole.superAdmin)) {
+      if (isUserExist.role === userRole.superAdmin) {
         result = await SellsModel.find({
           createdAt: { $gte: startOfDay, $lte: endOfDay },
         }).populate("seller");
@@ -102,7 +102,7 @@ const getSalesHistory = async (payload: string, user: JwtPayload) => {
         createdAt: { $gte: startOfWeek, $lte: endOfWeek },
       }).populate("seller");
 
-      if ((isUserExist.role === userRole.superAdmin)) {
+      if (isUserExist.role === userRole.superAdmin) {
         result = await SellsModel.find({
           createdAt: { $gte: startOfWeek, $lte: endOfWeek },
         }).populate("seller");
@@ -117,7 +117,7 @@ const getSalesHistory = async (payload: string, user: JwtPayload) => {
         createdAt: { $gte: startOfMonth, $lte: endOfMonth },
       }).populate("seller");
 
-      if ((isUserExist.role === userRole.superAdmin)) {
+      if (isUserExist.role === userRole.superAdmin) {
         result = await SellsModel.find({
           createdAt: { $gte: startOfMonth, $lte: endOfMonth },
         }).populate("seller");
@@ -133,7 +133,7 @@ const getSalesHistory = async (payload: string, user: JwtPayload) => {
         createdAt: { $gte: startOfYear, $lte: endOfYear },
       }).populate("seller");
 
-      if ((isUserExist.role === userRole.superAdmin)) {
+      if (isUserExist.role === userRole.superAdmin) {
         result = await SellsModel.find({
           createdAt: { $gte: startOfYear, $lte: endOfYear },
         }).populate("seller");
@@ -144,7 +144,7 @@ const getSalesHistory = async (payload: string, user: JwtPayload) => {
       result = await SellsModel.find({
         seller: isUserExist._id,
       }).populate("seller");
-      if ((isUserExist.role === userRole.superAdmin)) {
+      if (isUserExist.role === userRole.superAdmin) {
         result = await SellsModel.find({}).populate("seller");
       }
       break;
